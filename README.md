@@ -1,5 +1,4 @@
 # NDS Advanced Search
----
 
 **License:** GPLv2 or later
 
@@ -10,6 +9,7 @@
 **Requires PHP at least:** 5.6.0
 
 **A WordPress plugin to add an Advanced Search Form with auto-suggest using a shortcode.**
+
 _The intent is to help developers with a boilerplate search plugin with search suggestions that can be customized for advanced scenarios._
 
 ## Description

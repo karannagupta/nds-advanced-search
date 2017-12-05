@@ -1,0 +1,74 @@
+/**
+ * All of the CSS for your admin-specific functionality should be included in this file.
+ *
+ * The file is enqueued from inc/admin/class-admin.php.
+ */
+
+.nds-advanced-search-form-container form {
+	margin: 10px auto;
+
+}
+
+.nds-advanced-search-form-container p {
+	 width: 30%;
+	 padding: 0 10px 0 0;
+	 float: left;
+}
+
+#nds-advanced-search-form .nds-search-button {
+	background-color: #4bc970;
+	float: right;
+}
+
+#nds-advanced-search-form .nds-search-input {
+	width: 100%;
+}
+
+#nds-advanced-search-form .nds-input-container {
+	overflow: hidden;
+}
+
+.nds-search-results .flex-grid-container {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+
+.nds-search-results .flex-grid-item {
+	flex-basis: 250px;
+	margin: 10px;
+	font-weight: initial;
+	background-color: #eee;
+}
+
+.nds-search-results .flex-grid-item img {
+	display: block;
+	margin: 0 auto;
+}
+
+.nds-search-results .flex-grid-container .flex-grid-item .card-title {
+	text-align: center;
+	text-decoration: none;
+	text-transform: initial;
+	padding: 10px;
+	margin-bottom: 5px;
+	font-size: 14px;
+}
+
+.nds-search-results .flex-grid-container .flex-grid-item a {
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.nds-search-results .flex-grid-container .flex-grid-item .card-excerpt {
+	font-size: 12px;
+	padding: 10px;
+}
+
+.nds-search-results .flex-grid-container ul {
+	margin-left: 0;
+}

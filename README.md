@@ -52,10 +52,10 @@ The plugin boiler plate is a modified version of the `Plugin Boiler Plate` here:
 ## Screenshots
 
 #### 1. Access Plugin Settings in the Dashboard
-![Plugin Settings Link](http://video-lib.dev/wp-content/uploads/2017/12/nds-advanced-search-settings.png "Access plugin settings in the Dashboard")
+![Plugin Settings Link](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2017/12/nds-advanced-search-settings.png "Access plugin settings in the Dashboard")
 #### 2. Include the shortcode `[nds-advanced-search]` to add an advanced search form.
-![Add Shortcode to load the form](http://video-lib.dev/wp-content/uploads/2017/12/nds-advanced-search-shortcode.png "Shortcode to load the form")
+![Add Shortcode to load the form](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2017/12/nds-advanced-search-shortcode.png "Shortcode to load the form")
 #### 3. Search suggestions as you type!
-![Search suggestions as you type](http://video-lib.dev/wp-content/uploads/2017/12/nds-advanced-search-autosuggest.png "Search suggestions as you type")
+![Search suggestions as you type](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2017/12/nds-advanced-search-autosuggest.png "Search suggestions as you type")
 #### 4. Search results in a flexbox container
-![Search results in a flexbox container](http://video-lib.dev/wp-content/uploads/2017/12/nds-advanced-search-results.png  "Search results in a flexbox container")
+![Search results in a flexbox container](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2017/12/nds-advanced-search-results.png  "Search results in a flexbox container")

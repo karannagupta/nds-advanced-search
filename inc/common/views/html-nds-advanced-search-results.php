@@ -1,6 +1,6 @@
 <?php
 
-$transient_name = $this->transient_search_cpt['autosuggest_transient'];
+$transient_name = $this->plugin_transients['autosuggest_transient'];
 
 // retrieve the post types to search.
 $plugin_options = get_option( $this->plugin_name );

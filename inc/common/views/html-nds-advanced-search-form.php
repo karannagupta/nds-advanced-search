@@ -5,7 +5,6 @@
  */
 ?>
 
-<h3> Autosuggest Search </h3>
 <div class="nds-advanced-search-form-container">
 	<form id="nds-advanced-search-form" role="search" method="POST" class="search-form" action="">
 		<button class="nds-search-button" type="submit" class="search-submit"><i class="fa fa-search" aria-hidden="true"><span class="screen-reader-text"><?php echo _x( 'Search', 'submit button', '$this->plugin_text_domain' ); ?></span></i></button>

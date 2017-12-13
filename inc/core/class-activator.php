@@ -24,12 +24,19 @@ class Activator {
 
 		$min_php = '5.6.0';
 		$plugin_name = NS\PLUGIN_NAME;
+		$plugin_text_domain = NS\PLUGIN_TEXT_DOMAIN;
 
 		// Check PHP Version and deactivate & die if it doesn't meet minimum requirements.
 		if ( version_compare( PHP_VERSION, $min_php, '<' ) ) {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 			wp_die( 'This plugin requires a minmum PHP Version of ' . $min_php );
 		}
+
+		// temporary transient for admin notice on activation.
+		$transient_search = json_decode( NS\PLUGIN_TRANSIENT, true );
+		$transient_name = $transient_search['admin_notice_transient'];
+		$transient_expiration = $transient_search['admin_notice_transient_expiration'];
+		set_transient( $transient_name, true, $transient_expiration );
 
 		$default_options = array(
 			'post' => 1,

@@ -44,13 +44,13 @@ class Common {
 	private $plugin_text_domain;
 
 	/**
-	 * The object to hold details for the post transient.
+	 * The object to hold details for the plugin transient.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      Array    $post_search_transient    The transient object.
+	 * @var      Array    $plugin_transients    The transients for this plugin.
 	 */
-	private $transient_search_cpt;
+	private $plugin_transients;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -66,7 +66,7 @@ class Common {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->plugin_text_domain = $plugin_text_domain;
-		$this->transient_search_cpt = json_decode( NS\PLUGIN_TRANSIENT, true );
+		$this->plugin_transients = json_decode( NS\PLUGIN_TRANSIENT, true );
 
 	}
 
@@ -107,7 +107,7 @@ class Common {
 	public function delete_post_cache() {
 		// TODO combine transient operations in a separate class.
 		// delete the transitent.
-		$transient_name = $this->transient_search_cpt['autosuggest_transient'];
+		$transient_name = $this->plugin_transients['autosuggest_transient'];
 		if ( get_transient( $transient_name ) ) {
 			delete_transient( $transient_name );
 		}
@@ -120,8 +120,8 @@ class Common {
 	 * @since 1.0.0
 	 */
 	public function cache_posts_in_post_types() {
-		$transient_name = $this->transient_search_cpt['autosuggest_transient'];
-		$transient_expiration = $this->transient_search_cpt['expiration'];
+		$transient_name = $this->plugin_transients['autosuggest_transient'];
+		$transient_expiration = $this->plugin_transients['autosuggest_transient_expiration'];
 
 		// retrieve the post types to search.
 		$plugin_options = get_option( $this->plugin_name );
@@ -170,7 +170,7 @@ class Common {
 	 */
 	public function advanced_search_autosuggest_handler() {
 
-		$transient_name = $this->transient_search_cpt['autosuggest_transient'];
+		$transient_name = $this->plugin_transients['autosuggest_transient'];
 
 		// check if cached posts are available.
 		$cached_posts = get_transient( $transient_name );

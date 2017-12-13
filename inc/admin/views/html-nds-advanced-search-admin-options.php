@@ -16,7 +16,7 @@
 <div class="wrap">
 
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-	<h4 class="nav-tab-wrapper">Select Post Types to Include in the Advanced Search</h4>
+	<h4 class="nav-tab-wrapper"><?php echo esc_html( 'Select Post Types to Include in the Advanced Search', $this->plugin_text_domain ); ?></h4>
 	<br>
 	<form method="post" name="<?php echo $this->plugin_name; ?>_search_options" action="options.php">
 	<?php

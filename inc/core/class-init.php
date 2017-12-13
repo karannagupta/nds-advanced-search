@@ -128,6 +128,9 @@ class Init {
 		// Admin menu for the plugin.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
 
+		// Admin notices for the plugin.
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'activation_admin_notice' );
+
 	}
 
 	/**

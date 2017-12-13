@@ -27,6 +27,12 @@ class Deactivator {
 		if ( $plugin_options_exist ) {
 			delete_option( $plugin_name );
 		}
+
+		$transient_search = json_decode( NS\PLUGIN_TRANSIENT, true );
+		$transient_name = $transient_search['autosuggest_transient'];
+		if ( $transient_name ) {
+			delete_transient( $transient_name );
+		}
 	}
 
 }

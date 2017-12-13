@@ -54,7 +54,9 @@ define( NS . 'PLUGIN_TEXT_DOMAIN', $plugin_text_domain );
 
 $plugin_transient = array(
 	'autosuggest_transient' => 'nds_autosuggest_' . $plugin_version, // appending version in cases when the plugin updates and we want the newer transient version.
-	'expiration' => ( 1 * HOUR_IN_SECONDS ),
+	'autosuggest_transient_expiration' => ( 1 * HOUR_IN_SECONDS ),
+	'admin_notice_transient' => 'nds-advanced-search-activation-notice' . $plugin_version,
+	'admin_notice_transient_expiration' => 5,
 );
 
 // no need to json_encode in PHP 7.0.

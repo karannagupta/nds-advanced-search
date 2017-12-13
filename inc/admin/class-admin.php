@@ -44,6 +44,15 @@ class Admin {
 	private $plugin_text_domain;
 
 	/**
+	 * The transients for this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $plugin_transients    The transients for this plugin.
+	 */
+	private $plugin_transients;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
@@ -56,6 +65,7 @@ class Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->plugin_text_domain = $plugin_text_domain;
+		$this->plugin_transients = json_decode( NS\PLUGIN_TRANSIENT, true );
 
 	}
 
@@ -145,8 +155,7 @@ class Admin {
 
 		// TODO combine transient operations in a separate class.
 		// delete the transitent.
-		$transient_search_cpt = json_decode( NS\PLUGIN_TRANSIENT, true );
-		$transient_name = $transient_search_cpt['autosuggest_transient'];
+		$transient_name = $this->plugin_transients['autosuggest_transient'];
 		if ( get_transient( $transient_name ) ) {
 			delete_transient( $transient_name );
 		}
@@ -154,5 +163,28 @@ class Admin {
 		return $valid_options;
 	}
 
+	/**
+	 * Workaround to show an admin notice on plugin activation
+	 *
+	 * @since 1.0.0
+	 */
+	public function activation_admin_notice() {
+
+		$transient_name = $this->plugin_transients['admin_notice_transient'];
+
+		// Show admin notice if transient is available.
+		if ( get_transient( $transient_name ) ) {
+
+			$message = __( 'Please select the post types to include in the search from the ', $this->plugin_text_domain );
+			$plugin_settings_url= '<a href="' . admin_url( "options-general.php?page=" . $this->plugin_name ) . '">' . __( 'plugin\'s settings here', $this->plugin_text_domain ) . '</a>';
+
+			echo '<div class="updated notice-success is-dismissible">
+					<p>' . $message . $plugin_settings_url . '</p>
+				</div>';
+
+			// Delete the transient to display notice only once.
+			delete_transient( $transient_name );
+		}
+	}
 
 }

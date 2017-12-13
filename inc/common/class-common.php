@@ -229,7 +229,7 @@ class Common {
 	 *
 	 * @since    1.0.0
 	 */
-	public function shortcode_nds_advanced_search() {
+	public function shortcode_nds_advanced_search( $atts, $content = null ) {
 		/*
 		 * Hook in a custom search form to override searchform.php in the theme.
 		 *
@@ -245,13 +245,20 @@ class Common {
 		 */
 
 		add_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
-		get_search_form();
+		$echo = false;
+		$form_content = get_search_form( $echo );
 		remove_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
 
-		$search_term = isset( $_REQUEST['search_key'] ) ? $_REQUEST['search_key'] : false;
+		$search_term = isset( $_GET['search_key'] ) ? esc_html( $_GET['search_key'] ) : false;
 		if ( isset( $search_term ) && ! empty( $search_term ) ) {
+
+			ob_start();
 			include_once( 'views/html-nds-advanced-search-results.php' );
+			$form_content .= ob_get_contents();
+			ob_end_clean();
 		}
+
+		return $form_content;
 
 	}
 }

@@ -4,7 +4,7 @@ $transient_name = $this->plugin_transients['autosuggest_transient'];
 
 // retrieve the post types to search.
 $plugin_options = get_option( $this->plugin_name );
-$post_types = array_keys( $plugin_options, "1" );
+$post_types = array_keys( $plugin_options, 1, true );
 
 // check if cached posts are available.
 $cached_posts = get_transient( $transient_name );

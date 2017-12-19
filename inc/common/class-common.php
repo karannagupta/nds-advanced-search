@@ -125,7 +125,7 @@ class Common {
 
 		// retrieve the post types to search.
 		$plugin_options = get_option( $this->plugin_name );
-		$post_types = array_keys( $plugin_options, "1" );
+		$post_types = array_keys( $plugin_options, 1, true );
 
 		// check the transient for existing cached data.
 		$cached_posts = get_transient( $transient_name );
@@ -228,6 +228,9 @@ class Common {
 	 * retrieves a custom search form from "advanced_search_form_markup" that overrides searchform.php.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param  mixed  $atts an associative array of attributes, or an empty string if no attributes are given.
+	 * @param  string $content the enclosed content.
 	 */
 	public function shortcode_nds_advanced_search( $atts, $content = null ) {
 		/*
@@ -249,7 +252,7 @@ class Common {
 		$form_content = get_search_form( $echo );
 		remove_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
 
-		$search_term = isset( $_GET['search_key'] ) ? esc_html( $_GET['search_key'] ) : false;
+		$search_term = isset( $_GET['search_key'] ) ? sanitize_text_field( $_GET['search_key'] ) : false;
 		if ( isset( $search_term ) && ! empty( $search_term ) ) {
 
 			ob_start();

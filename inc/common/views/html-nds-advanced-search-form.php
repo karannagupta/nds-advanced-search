@@ -13,6 +13,6 @@
 				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', $this->plugin_text_domain ); ?></span>
 				<input required class="nds-search-input" id="nds-search-box" type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'start typing for suggestions &hellip;', 'placeholder', $this->plugin_text_domain ); ?>" name="search_key" />
 			</label>
-		</div>
-	</form>
-</div>
+		</div> <!-- nds-input-container -->
+	</form> <!-- nds-advanced-search-for -->
+</div> <!-- nds-advanced-search-form-container -->

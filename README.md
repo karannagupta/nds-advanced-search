@@ -45,6 +45,18 @@ You can control the `custom post types` to include for the search from `Settings
 * Boilerplate files and comments have not been removed.
 * To rename the plugin and files refer the steps here: https://github.com/nuancedesignstudio/WordPress-Plugin-Boilerplate
 
+### i18n Tools
+
+The Plugin uses a variable to store the text domain used when internationalizing strings throughout the code. To take advantage of this method, there are tools that are recommended for providing correct, translatable files:
+
+* [Poedit](http://www.poedit.net/)
+* [makepot](http://i18n.svn.wordpress.org/tools/trunk/)
+* [i18n](https://github.com/grappler/i18n)
+
+Any of the above tools should provide you with the proper tooling to internationalize the plugin.
+
+However, if you still face problems translating the strings with an automated tool/process, replace `$this->plugin_text_domain` with the literal string of your plugin's text domain.
+
 ## Credits
 
 The plugin boiler plate is a modified version of the `Plugin Boiler Plate` here: https://github.com/DevinVinson/WordPress-Plugin-Boilerplate

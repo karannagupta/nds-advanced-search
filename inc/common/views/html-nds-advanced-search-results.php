@@ -25,7 +25,8 @@ $args = array(
 	'posts_per_page'      => -1,
 	'post__in'            => $cached_post_ids, // use post ids that were cached in the loop earlier.
 	'ignore_sticky_posts' => true,
-	's'                   => $search_term, // search the post_content for the specified search term.
+	's'                   => $search_term,  // the keyword/phrase to search.
+	'sentence'            => true, // perform a phrase search.
 );
 $search_query = new \WP_Query( $args );
 ?>

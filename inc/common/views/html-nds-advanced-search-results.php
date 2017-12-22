@@ -31,39 +31,40 @@ $args = array(
 $search_query = new \WP_Query( $args );
 ?>
 <div class="nds-search-results">
-	<ul class="flex-grid-container">
-		<!-- Start the Loop. -->
-		<?php
-		if ( $search_query->have_posts() ) :
+	<?php if ( $search_query->have_posts() ) : ?>
+		<ul class="flex-grid-container">
+			<!-- Start the Loop. -->
+			<?php
 			while ( $search_query->have_posts() ) :
-				$search_query->the_post();
-		?>
+					$search_query->the_post();
+			?>
 
-				<li class="flex-grid-item">
+					<li class="flex-grid-item">
 
-					<!-- the thumbnail -->
-					<p>
-						<?php if ( has_post_thumbnail() ) : ?>
-							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
-						<?php endif; ?>
-					</p>
-					<!-- title -->
-					<p class="card-title">
-						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-					</p>
-					<!-- excerpt -->
-					<p class="card-excerpt">
-						<?php echo wp_trim_words( get_the_content(), 30, ' ...' ); ?>
-					</p>
+						<!-- the thumbnail -->
+						<p>
+							<?php if ( has_post_thumbnail() ) : ?>
+								<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+							<?php endif; ?>
+						</p>
+						<!-- title -->
+						<p class="card-title">
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</p>
+						<!-- excerpt -->
+						<p class="card-excerpt">
+							<?php echo wp_trim_words( get_the_content(), 30, ' ...' ); ?>
+						</p>
 
-				</li> <!-- flex-grid-item -->
-			<?php endwhile; ?>
-			<?php wp_reset_postdata(); ?>
+					</li> <!-- flex-grid-item -->
+				<?php endwhile; ?>
+				<?php wp_reset_postdata(); ?>
+		</ul> <!-- flex-grid-container -->
 		<?php else : ?>
-		<?php echo __( 'Nothing Found ...', $this->plugin_text_domain ); ?>
+			<p>
+				<?php echo __( 'Nothing Found ...', $this->plugin_text_domain ); ?>
+			</p>
 		<?php endif; ?>
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>></div>
-	</ul> <!-- flex-grid-container -->
 </div> <!-- nds-search-results -->
 
 

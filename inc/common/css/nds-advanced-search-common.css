@@ -6,7 +6,6 @@
 
 .nds-advanced-search-form-container form {
 	margin: 10px auto;
-
 }
 
 .nds-advanced-search-form-container p {
@@ -32,14 +31,22 @@
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: row wrap;
+	        flex-flow: row wrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 
 
 .nds-search-results .flex-grid-item {
-	flex-basis: 250px;
+	-ms-flex-preferred-size: 250px;
+	    flex-basis: 250px;
 	margin: 10px;
 	font-weight: initial;
 	background-color: #eee;
@@ -61,7 +68,8 @@
 
 .nds-search-results .flex-grid-container .flex-grid-item a {
 	text-decoration: none;
-	box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 .nds-search-results .flex-grid-container .flex-grid-item .card-excerpt {

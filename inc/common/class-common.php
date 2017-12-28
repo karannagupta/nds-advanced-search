@@ -90,11 +90,23 @@ class Common {
 	 */
 	public function enqueue_scripts() {
 
+		$transient_name = $this->plugin_transients['autosuggest_transient'];
+		$cached_posts_titles = array();
+
+		// check if cached posts are available.
+		$cached_posts = get_transient( $transient_name );
+		if ( $cached_posts ) {
+			foreach ( $cached_posts as $index => $post ) {
+				$cached_posts_titles[ $index ] = $post['title'];
+			}
+		}
+
 		$params = array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'cached_post_titles' => $cached_posts_titles,
 		);
-		wp_enqueue_script( 'nds_advanced_search_autosuggest', plugin_dir_url( __FILE__ ) . 'js/nds-advanced-search-autosuggest.js', array( 'jquery', 'jquery-ui-autocomplete' ), $this->version, true );
-		wp_localize_script( 'nds_advanced_search_autosuggest', 'params', $params );
+		wp_enqueue_script( 'nds_advanced_search', plugin_dir_url( __FILE__ ) . 'js/nds-advanced-search.js', array( 'jquery', 'jquery-ui-autocomplete' ), $this->version, true );
+		wp_localize_script( 'nds_advanced_search', 'params', $params );
 
 	}
 
@@ -135,9 +147,10 @@ class Common {
 				'post_status' => 'publish',
 				'posts_per_page' => -1,
 			);
-
-			// offer suggestions only for posts under events and videos.
+			
 			$custom_post_query = new \WP_Query( $args );
+            
+            // offer suggestions only for posts under the specfied post types.
 			$posts_in_custom_post_type = $custom_post_query->get_posts();
 
 			if ( $posts_in_custom_post_type ) {
@@ -176,17 +189,17 @@ class Common {
 		$cached_posts = get_transient( $transient_name );
 		if ( false === $cached_posts ) {
 
-			// retrieve posts by running a new loop and cache the posts the transients as well.
+			// retrieve posts by running a new loop and cache the posts in the transient as well.
 			$cached_posts = $this->cache_posts_in_post_types();
 		}
 
-		$suggestions = array();
+		$post_titles_for_cpts = array();
 		foreach ( $cached_posts as $index => $post ) {
-			$suggestions[ $index ] = $post['title'];
+			$post_titles_for_cpts[ $index ] = $post['title'];
 		}
 
 		// Echo the response to the AJAX request.
-		wp_send_json( $suggestions );
+		wp_send_json( $post_titles_for_cpts );
 
 		// wp_send_json will also die().
 	}

@@ -176,20 +176,16 @@ class Init {
 		$this->loader->add_action( 'init', $plugin_common, 'register_shortcodes' );
 
 		/**
-		 *  Actions to delete transients for custom post types.
+		 * Actions to delete transients for custom post types.
 		 *
-		 * https://codex.wordpress.org/Post_Status_Transitions.
+		 * Link: https://codex.wordpress.org/Post_Status_Transitions.
+		 *
+		 * transition_post_status
+		 * {old_status}_to_{new_status}
+		 * {status}_{post_type}
 		 */
-		$plugin_options = get_option( $this->plugin_name );
-			if( $plugin_options ) {
-			$post_types = array_keys( $plugin_options, "1" );
-			foreach ( $post_types as $post_type ) {
-
-				// this will run when a post is published or updated.
-				$this->loader->add_action( 'publish_' . $post_type, $plugin_common, 'delete_post_cache', 15 );
-			}
-		}
-
+		$this->loader->add_action( 'transition_post_status', $plugin_common, 'delete_post_cache_for_post_type', 10, 3 );
+        
 	}
 
 	/**

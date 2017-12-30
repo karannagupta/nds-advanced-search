@@ -115,13 +115,25 @@ class Common {
 	 * registered cpt has been published or updated.
 	 *
 	 * @since 1.0.0
+	 * @param string  $new_status New Post Status.
+	 * @param string  $old_status Old Post Status.
+	 * @param WP_Post $post  The Post Object.
 	 */
-	public function delete_post_cache() {
+	public function delete_post_cache_for_post_type( $new_status, $old_status, $post ) {
+
 		// TODO combine transient operations in a separate class.
-		// delete the transitent.
 		$transient_name = $this->plugin_transients['autosuggest_transient'];
-		if ( get_transient( $transient_name ) ) {
-			delete_transient( $transient_name );
+
+		$plugin_options = get_option( $this->plugin_name );
+		if ( $plugin_options ) {
+			$post_types = array_keys( $plugin_options, 1, true );
+			foreach ( $post_types as $post_type ) {
+				if ( $post_type === $post->post_type && get_transient( $transient_name ) ) {
+
+					// delete the transitent.
+					delete_transient( $transient_name );
+				}
+			}
 		}
 	}
 

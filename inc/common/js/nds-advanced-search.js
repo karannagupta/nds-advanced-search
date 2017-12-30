@@ -56,7 +56,7 @@
 
 			// Else Make an AJAX Request.
 
-			// AJAX call is made only if wp_localize_script sent any empty array for post titles.
+			// AJAX call is made if wp_localize_script sent an empty array for post titles.
 			sameAjaxRequest = $.ajax ({
 
 				url: params.ajaxurl, // domain/wp-admin/admin-ajax.php

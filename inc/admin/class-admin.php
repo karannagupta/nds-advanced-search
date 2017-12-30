@@ -138,29 +138,50 @@ class Admin {
 	 */
 	public function validate_settings( $input ) {
 
-		$valid_options = array();
+		$old_plugin_options = get_option( $this->plugin_name );
 
-		$args = array(
-			'public' => true,
-			'_builtin' => false,
-		);
-		$post_types = get_post_types( $args, 'objects' );
+		// check that at least one post type is selected.
+		if ( ! empty( $input ) ) {
+			$valid_options = array();
 
-		foreach ( $post_types as $post_type ) {
-			$the_post_type = $post_type->name;
-			$valid_options[ $the_post_type ] = ( isset( $input[ $the_post_type ] ) && ! empty( $input[ $the_post_type ] ) ) ? 1 : 0;
+			$args = array(
+				'public' => true,
+				'_builtin' => false,
+			);
+			$post_types = get_post_types( $args, 'objects' );
+
+			foreach ( $post_types as $post_type ) {
+				$the_post_type = $post_type->name;
+				$valid_options[ $the_post_type ] = ( isset( $input[ $the_post_type ] ) && ! empty( $input[ $the_post_type ] ) ) ? 1 : 0;
+			}
+
+			// as builtin post types are excluded above, manually add post and page.
+			$valid_options['post'] = ( isset( $input['post'] ) && ! empty( $input['post'] ) ) ? 1 : 0;
+			$valid_options['page'] = ( isset( $input['page'] ) && ! empty( $input['page'] ) ) ? 1 : 0;
+
+			// TODO combine transient operations in a separate class.
+			// delete the transitent.
+			$transient_name = $this->plugin_transients['autosuggest_transient'];
+			if ( get_transient( $transient_name ) ) {
+
+				// delete transient as settings are updated.
+				delete_transient( $transient_name );
+			}
+			return $valid_options;
+
+		} else {
+
+			// Display and error as nothing was selected.
+			 add_settings_error(
+				 $this->plugin_name,
+				 esc_attr( $this->plugin_name ),
+				 __( 'At least one Post Type must be selected', 'my-text-domain' ),
+				 'error'
+			 );
+
+			 // return the previous settings.
+			 return $old_plugin_options;
 		}
-		$valid_options['post'] = ( isset( $input['post'] ) && ! empty( $input['post'] ) ) ? 1 : 0;
-		$valid_options['page'] = ( isset( $input['page'] ) && ! empty( $input['page'] ) ) ? 1 : 0;
-
-		// TODO combine transient operations in a separate class.
-		// delete the transitent.
-		$transient_name = $this->plugin_transients['autosuggest_transient'];
-		if ( get_transient( $transient_name ) ) {
-			delete_transient( $transient_name );
-		}
-
-		return $valid_options;
 	}
 
 	/**

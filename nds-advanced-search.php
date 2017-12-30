@@ -92,6 +92,12 @@ register_deactivation_hook( __FILE__, array( NS . 'Inc\Core\Deactivator', 'deact
  */
 class NDS_Advanced_Search {
 
+	/**
+	 * The instance of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @var      Init $init Instance of the plugin.
+	 */
 	static $init;
 	/**
 	 * Loads the plugin

@@ -159,10 +159,10 @@ class Common {
 				'post_status' => 'publish',
 				'posts_per_page' => -1,
 			);
-			
+
 			$custom_post_query = new \WP_Query( $args );
-            
-            // offer suggestions only for posts under the specfied post types.
+
+			// offer suggestions only for posts under the specfied post types.
 			$posts_in_custom_post_type = $custom_post_query->get_posts();
 
 			if ( $posts_in_custom_post_type ) {
@@ -277,7 +277,8 @@ class Common {
 		$form_content = get_search_form( $echo );
 		remove_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
 
-		$search_term = isset( $_GET['search_key'] ) ? sanitize_text_field( $_GET['search_key'] ) : false;
+		$get_form_input = filter_input( INPUT_POST, $this->plugin_name , FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+		$search_term = isset( $get_form_input['search_key'] ) ? sanitize_text_field( $get_form_input['search_key'] ) : false;
 		if ( isset( $search_term ) && ! empty( $search_term ) ) {
 
 			ob_start();

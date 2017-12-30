@@ -13,7 +13,6 @@ use NDS_Advanced_Search as NS;
  *
  * @author     Karan NA Gupta
  */
-
 class Deactivator {
 
 	/**

@@ -15,14 +15,20 @@ namespace NDS_Advanced_Search\Inc\Core;
  */
 class Internationalization_i18n {
 
+	/**
+	 * The text domain of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $version    The text domain of the plugin.
+	 */
 	private $text_domain;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string $plugin_name       The name of this plugin.
-	 * @param      string $version    The version of this plugin.
+	 * @param      string $plugin_text_domain  The text domain of the plugin.
 	 */
 	public function __construct( $plugin_text_domain ) {
 

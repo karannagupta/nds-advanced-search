@@ -197,7 +197,7 @@ class Admin {
 		if ( get_transient( $transient_name ) ) {
 
 			$message = __( 'Please select the post types to include in the search from the ', $this->plugin_text_domain );
-			$plugin_settings_url= '<a href="' . admin_url( "options-general.php?page=" . $this->plugin_name ) . '">' . __( 'plugin\'s settings here', $this->plugin_text_domain ) . '</a>';
+			$plugin_settings_url = '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_name ) . '">' . __( 'plugin\'s settings here', $this->plugin_text_domain ) . '</a>';
 
 			echo '<div class="updated notice-success is-dismissible">
 					<p>' . $message . $plugin_settings_url . '</p>

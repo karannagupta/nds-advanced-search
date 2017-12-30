@@ -57,12 +57,15 @@ class Init {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string    $version    The text domain of the plugin.
 	 */
 	protected $plugin_text_domain;
 
-
-	// define the core functionality of the plugin.
+	/**
+	 * Define the core functionality of the plugin.
+	 *
+	 * @since 1.0.0
+	 */
 	public function __construct() {
 
 		$this->plugin_name = NS\PLUGIN_NAME;
@@ -122,8 +125,8 @@ class Init {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		// Save/Update plugin options
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'update_plugin_options');
+		// Save/Update plugin options.
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'update_plugin_options' );
 
 		// Admin menu for the plugin.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
@@ -185,7 +188,7 @@ class Init {
 		 * {status}_{post_type}
 		 */
 		$this->loader->add_action( 'transition_post_status', $plugin_common, 'delete_post_cache_for_post_type', 10, 3 );
-        
+
 	}
 
 	/**

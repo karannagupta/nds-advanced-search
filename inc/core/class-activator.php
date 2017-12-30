@@ -24,7 +24,6 @@ class Activator {
 
 		$min_php = '5.6.0';
 		$plugin_name = NS\PLUGIN_NAME;
-		$plugin_text_domain = NS\PLUGIN_TEXT_DOMAIN;
 
 		// Check PHP Version and deactivate & die if it doesn't meet minimum requirements.
 		if ( version_compare( PHP_VERSION, $min_php, '<' ) ) {

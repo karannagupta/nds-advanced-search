@@ -6,7 +6,7 @@ use NDS_Advanced_Search as NS;
 /**
  * The public-facing functionality of the plugin.
  *
- * Defines the plugin name, version, hooks and
+ * Defines the Shortcode, Search Form, Hooks and
  * the public-facing stylesheet and JavaScript.
  *
  * @link       http://nuancedesignstudio.in
@@ -111,8 +111,8 @@ class Common {
 	}
 
 	/**
-	 * Delete cached posts from transients when a
-	 * registered cpt has been published or updated.
+	 * Delete cached posts from the transient when a post belonging to a
+	 * post type specified in the plugin settings has been published or updated.
 	 *
 	 * @since 1.0.0
 	 * @param string  $new_status New Post Status.
@@ -138,8 +138,8 @@ class Common {
 	}
 
 	/**
-	 * Cache WordPress posts from multiple post types
-	 * where the meta key include_in_search is set to true.
+	 * Cache WordPress posts for post types that are specified in the
+	 * plugin setting to be included in the custom search.
 	 *
 	 * @since 1.0.0
 	 */
@@ -147,7 +147,7 @@ class Common {
 		$transient_name = $this->plugin_transients['autosuggest_transient'];
 		$transient_expiration = $this->plugin_transients['autosuggest_transient_expiration'];
 
-		// retrieve the post types to search.
+		// retrieve the selected post types from the plugin settings to include in the custom search.
 		$plugin_options = get_option( $this->plugin_name );
 		$post_types = array_keys( $plugin_options, 1, true );
 
@@ -155,23 +155,28 @@ class Common {
 		$cached_posts = get_transient( $transient_name );
 		if ( false === $cached_posts ) {
 			$args = array(
-				'post_type' => $post_types,
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
+				'post_type'           => $post_types,
+				'post_status'         => 'publish',
+				'posts_per_page'      => -1,
+				'no_found_rows'       => true, // true by default.
+				'suppress_filters'    => true, // true by default.
+				'ignore_sticky_posts' => true, // true by default.
 			);
 
-			$custom_post_query = new \WP_Query( $args );
+			/*
+			 * Running "get_posts" in favour of WP_Query to retrieve
+			 * posts belonging to the required post types.
+			 */
+			$posts_in_custom_post_type = get_posts( $args );
 
-			// offer suggestions only for posts under the specfied post types.
-			$posts_in_custom_post_type = $custom_post_query->get_posts();
-
+			// Check if posts were found.
 			if ( $posts_in_custom_post_type ) {
 				foreach ( $posts_in_custom_post_type as $key => $post ) {
 
+					// cache the post titles and post ids.
 					$cached_post = array(
 						'id' => $post->ID,
 						'title' => esc_html( $post->post_title ),
-						'permalink' => get_permalink( $post->ID ),
 					);
 					$cached_posts[] = $cached_post;
 				}
@@ -183,13 +188,15 @@ class Common {
 				 */
 				set_transient( $transient_name, $cached_posts, $transient_expiration );
 			}
-			wp_reset_postdata();
 		}
 		return $cached_posts;
 	}
 
 	/**
-	 * AJAX handler for the autosuggest.
+	 * AJAX handler for the auto-suggest.
+	 *
+	 * Callback for the "wp_ajax_nds_advanced_search_autosuggest" and
+	 * "wp_ajax_nopriv_nds_advanced_search_autosuggest" hooks in "class-init.php"
 	 *
 	 * @since    1.0.0
 	 */
@@ -201,7 +208,7 @@ class Common {
 		$cached_posts = get_transient( $transient_name );
 		if ( false === $cached_posts ) {
 
-			// retrieve posts by running a new loop and cache the posts in the transient as well.
+			// retrieve posts by running a new query and cache the posts in the transient as well.
 			$cached_posts = $this->cache_posts_in_post_types();
 		}
 

@@ -2,7 +2,7 @@
 
 $transient_name = $this->plugin_transients['autosuggest_transient'];
 
-// retrieve the post types to search.
+// retrieve the post types to search from the plugin settings.
 $plugin_options = get_option( $this->plugin_name );
 $post_types = array_keys( $plugin_options, 1, true );
 
@@ -10,7 +10,7 @@ $post_types = array_keys( $plugin_options, 1, true );
 $cached_posts = get_transient( $transient_name );
 if ( false === $cached_posts ) {
 
-	// retrieve posts for the specified cpts by running a new loop and cache the posts as well.
+	// retrieve posts for the specified post types by running a new query and cache the posts as well.
 	$cached_posts = $this->cache_posts_in_post_types();
 }
 
@@ -19,11 +19,12 @@ if ( false === $cached_posts ) {
  * the post ids were cached when the auto suggest was invoked.
  */
 $cached_post_ids = array_column( $cached_posts, 'id' );
-// run a loop to search against post ids for the cpts.
+// run a new query to search against post ids for the seleted post types.
 $args = array(
 	'post_type'           => $post_types,
 	'posts_per_page'      => -1,
-	'post__in'            => $cached_post_ids, // use post ids that were cached in the loop earlier.
+	'no_found_rows'       => true, // as we don't need pagination.
+	'post__in'            => $cached_post_ids, // use post ids that were cached in the query earlier.
 	'ignore_sticky_posts' => true,
 	's'                   => $search_term,  // the keyword/phrase to search.
 	'sentence'            => true, // perform a phrase search.

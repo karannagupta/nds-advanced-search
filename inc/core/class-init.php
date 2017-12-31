@@ -152,8 +152,9 @@ class Init {
 	}
 
 	/**
-	 * Register all of the hooks related to the common functionality
-	 * of the plugin.
+	 * Register all of the hooks related to the common functionality of the plugin.
+	 *
+	 * The search form logic is written here.
 	 *
 	 * @access    private
 	 */
@@ -165,21 +166,21 @@ class Init {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_common, 'enqueue_scripts' );
 
 		/*
-		 * to completely replace searchform.php with a custom form uncomment the line
+		 * To completely replace searchform.php with a custom form uncomment the line
 		 * below, and delete the apply_filter and remove_filter statements in the
 		 * method shortcode_nds_advanced_search of common/class-common.php
 		 */
 		//$this->loader->add_filter( 'get_search_form', $plugin_common, 'advanced_search_form_markup' );
 
-		// ajax handler for loading the search auto suggest.
+		// action to add the [nds-advanced-search] shortcode that loads the custom search form.
+		$this->loader->add_action( 'init', $plugin_common, 'register_shortcodes' );
+
+		// ajax handler for loading the search auto-suggest.
 		$this->loader->add_action( 'wp_ajax_nds_advanced_search_autosuggest', $plugin_common, 'advanced_search_autosuggest_handler' );
 		$this->loader->add_action( 'wp_ajax_nopriv_nds_advanced_search_autosuggest', $plugin_common, 'advanced_search_autosuggest_handler' );
 
-		// action to add the [nds-advanced-search] shortcode that loads the advanced form.
-		$this->loader->add_action( 'init', $plugin_common, 'register_shortcodes' );
-
 		/**
-		 * Actions to delete transients for custom post types.
+		 * Actions to delete the transient for the post types specified in the plugin settings.
 		 *
 		 * Link: https://codex.wordpress.org/Post_Status_Transitions.
 		 *

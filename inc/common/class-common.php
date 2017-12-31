@@ -249,8 +249,8 @@ class Common {
 	 * Shortcode to add the advanced search form.
 	 *
 	 * Loads the custom search form added via the get_search_form filter hook.
-	 *
-	 * retrieves a custom search form from "advanced_search_form_markup" that overrides searchform.php.
+	 * The custom search form is retrieved from the "advanced_search_form_markup" method.
+	 * Returns the custom search form, and if the form was submitted the Search Results as well.
 	 *
 	 * @since    1.0.0
 	 *
@@ -259,34 +259,41 @@ class Common {
 	 */
 	public function shortcode_nds_advanced_search( $atts, $content = null ) {
 		/*
-		 * Hook in a custom search form to override searchform.php in the theme.
+		 * Hook in a custom search form to override searchform.php in the theme or the
+		 * default search form using the "get_search_form" filter hook.
 		 *
 		 * Note: I am adding and removing the "get_search_form" filter as I want my
-		 * advanced form to load only when I invoke it using the custom plugin shortcode.
-		 *
+		 * advanced form to load only when I invoke it using the plugin shortcode.
 		 * This will ensure that any form defined in the theme's searchform.php is not
 		 * overwritten.
 		 *
 		 * To completely override searchform.php detele the add_filter and remove_filter
-		 * lines above and uncomment line 165 in the method "define_common_hooks" of
+		 * lines above and uncomment line 172 in the method "define_common_hooks" of
 		 * core/class-init.php.
 		 */
-
 		add_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
-		$echo = false;
+
+		// https://core.trac.wordpress.org/browser/trunk/src/wp-includes/general-template.php#L182.
+		$echo = false; // return and not echo the form.
 		$form_content = get_search_form( $echo );
+
 		remove_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
 
+		// form input is stored inside an associative array with the plugin's name.
 		$get_form_input = filter_input( INPUT_POST, $this->plugin_name , FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 		$search_term = isset( $get_form_input['search_key'] ) ? sanitize_text_field( $get_form_input['search_key'] ) : false;
+
+		// check if the form was submitted.
 		if ( isset( $search_term ) && ! empty( $search_term ) ) {
 
+			// append the search results to $form_content.
 			ob_start();
 			include_once( 'views/html-nds-advanced-search-results.php' );
 			$form_content .= ob_get_contents();
 			ob_end_clean();
 		}
 
+		// return the content of the shortcode.
 		return $form_content;
 
 	}

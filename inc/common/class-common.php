@@ -159,7 +159,7 @@ class Common {
 				'post_status'         => 'publish',
 				'posts_per_page'      => -1,
 				'no_found_rows'       => true, // true by default.
-				'suppress_filters'    => true, // true by default.
+				'suppress_filters'    => false, // true by default.
 				'ignore_sticky_posts' => true, // true by default.
 			);
 

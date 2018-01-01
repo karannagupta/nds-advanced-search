@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 $transient_name = $this->plugin_transients['autosuggest_transient'];
 
 // retrieve the post types to search from the plugin settings.

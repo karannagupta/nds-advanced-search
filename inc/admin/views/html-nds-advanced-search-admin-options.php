@@ -11,6 +11,11 @@
  * @package    NDS_Advanced_Search
  * @subpackage NDS_Advanced_Search/inc/admin/views
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 ?>
 
 <div class="wrap">

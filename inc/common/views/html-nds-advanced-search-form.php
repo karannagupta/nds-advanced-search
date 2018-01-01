@@ -5,6 +5,11 @@
  * Note: Form input is stored inside an array with the plugin's name
  * e.g. $_POST['plugin_name']
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 ?>
 
 <div class="nds-advanced-search-form-container">

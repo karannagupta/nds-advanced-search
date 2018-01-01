@@ -1,7 +1,9 @@
 <?php
-
 /*
  * Markup for the custom search form goes here.
+ *
+ * Note: Form input is stored inside an array with the plugin's name
+ * e.g. $_POST['plugin_name']
  */
 ?>
 

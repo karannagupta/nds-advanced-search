@@ -167,11 +167,11 @@ class Common {
 			 * Running "get_posts" in favour of WP_Query to retrieve
 			 * posts belonging to the required post types.
 			 */
-			$posts_in_custom_post_type = get_posts( $args );
+			$posts_in_required_post_types = get_posts( $args );
 
 			// Check if posts were found.
-			if ( $posts_in_custom_post_type ) {
-				foreach ( $posts_in_custom_post_type as $key => $post ) {
+			if ( $posts_in_required_post_types ) {
+				foreach ( $posts_in_required_post_types as $key => $post ) {
 
 					// cache the post titles and post ids.
 					$cached_post = array(
@@ -212,13 +212,13 @@ class Common {
 			$cached_posts = $this->cache_posts_in_post_types();
 		}
 
-		$post_titles_for_cpts = array();
+		$cached_post_titles = array();
 		foreach ( $cached_posts as $index => $post ) {
-			$post_titles_for_cpts[ $index ] = $post['title'];
+			$cached_post_titles[ $index ] = $post['title'];
 		}
 
 		// Echo the response to the AJAX request.
-		wp_send_json( $post_titles_for_cpts );
+		wp_send_json( $cached_post_titles );
 
 		// wp_send_json will also die().
 	}

@@ -10,16 +10,14 @@ $post_types = array_keys( $plugin_options, 1, true );
 $cached_posts = get_transient( $transient_name );
 if ( false === $cached_posts ) {
 
-	// retrieve posts for the specified post types by running a new query and cache the posts as well.
+	// retrieve posts for the specified post types by running get_posts and cache the posts as well.
 	$cached_posts = $this->cache_posts_in_post_types();
 }
 
-/**
- * Extract the cached post ids from the transient into an array.
- * the post ids were cached when the auto suggest was invoked.
- */
+// extract the cached post ids from the transient into an array.
 $cached_post_ids = array_column( $cached_posts, 'id' );
-// run a new query to search against post ids for the seleted post types.
+
+// run a new query to against the search key and the cached post ids for the seleted post types.
 $args = array(
 	'post_type'           => $post_types,
 	'posts_per_page'      => -1,
@@ -31,6 +29,8 @@ $args = array(
 );
 $search_query = new \WP_Query( $args );
 ?>
+
+<!-- Search Results -->
 <div class="nds-search-results">
 	<?php if ( $search_query->have_posts() ) : ?>
 		<ul class="flex-grid-container">

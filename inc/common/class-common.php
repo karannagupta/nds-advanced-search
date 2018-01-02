@@ -269,14 +269,16 @@ class Common {
 		 * Hook in a custom search form to override searchform.php in the theme or the
 		 * default search form using the "get_search_form" filter hook.
 		 *
+		 * https://developer.wordpress.org/reference/functions/get_search_form/
+		 *
 		 * Note: I am adding and removing the "get_search_form" filter as I want my
 		 * advanced form to load only when I invoke it using the plugin shortcode.
 		 * This will ensure that any form defined in the theme's searchform.php is not
 		 * overwritten.
 		 *
 		 * To completely override searchform.php detele the add_filter and remove_filter
-		 * lines above and uncomment line 172 in the method "define_common_hooks" of
-		 * core/class-init.php.
+		 * lines below and uncomment line 172 in the method "define_common_hooks" of
+		 * inc/core/class-init.php.
 		 */
 		add_filter( 'get_search_form', array( $this, 'advanced_search_form_markup' ) );
 

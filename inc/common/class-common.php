@@ -163,10 +163,7 @@ class Common {
 				'ignore_sticky_posts' => true, // true by default.
 			);
 
-			/*
-			 * Running "get_posts" in favour of WP_Query to retrieve
-			 * posts belonging to the required post types.
-			 */
+			// get_posts() to retrieve posts belonging to the required post types.
 			$posts_in_required_post_types = get_posts( $args );
 
 			// Check if posts were found.
@@ -183,7 +180,7 @@ class Common {
 
 				/**
 				 * Save the post data in a transient.
-				 * For better performance cache only the post ids, titles, and permalink
+				 * For better performance cache only the post ids, titles
 				 * instead of the entire WP Query.
 				 */
 				set_transient( $transient_name, $cached_posts, $transient_expiration );

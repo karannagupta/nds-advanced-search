@@ -17,13 +17,13 @@ _The intent is to help developers with a boilerplate search plugin with search s
 The plugin adds a custom Search Form using a `shortcode` on any page.
 It provides `search suggestions` as you type. The results are displayed on the same page using a flexbox container.
 The plugin overrides the `searchform.php` defined by the theme but only on the page where the shortcode is used.
-You can control the `custom post types` to include for the search from `Settings->Advanced Search Settings`. By default only posts are included.
+You can control the `custom post types` to include in the search from `Settings->Advanced Search Settings`. By default only posts are included.
 
 ## Installation Manually
 
-1. Download the latest archive and extract to a folderr
+1. Download the latest archive and extract to a folder
 2. Upload `nds-advanced-search` to the `/wp-content/plugins/` directory
-3. Activate the plugin through the 'Plugins' menu in WordPress
+3. Activate the plugin through the `Plugin Menu` in WordPress
 
 ## Usage
 
@@ -34,8 +34,8 @@ You can control the `custom post types` to include for the search from `Settings
 
 ## Features
 
-* Makes uses of WordPress transients to cache the search results. The transient expipry is one hour.
-* The AJAX request for search suggestions is also cahced to prevent ajax calls when a search term is repeated
+* Makes uses of WordPress transients to cache the search results. The transient expiry is six hours.
+* The AJAX request for search suggestions is also cached to prevent ajax calls when a search term is repeated
 * Specify post types to include in search from the `Dashboard->Settings->Advanced Search Settings`
 * Does not depend on Theme Page Templates
 * Makes use of my `Object Oriented Plugin Bolier Plate` here: https://github.com/nuancedesignstudio/WordPress-Plugin-Boilerplate

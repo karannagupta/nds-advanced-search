@@ -10,7 +10,7 @@
 
 **A WordPress plugin to add an Advanced Search Form with auto-suggest using a shortcode.**
 
-_The intent is to help developers with a boilerplate search plugin with search suggestions that can be customized for advanced scenarios._
+_The intent is to help developers with a boilerplate search plugin with search suggestions that can be customized for advanced scenarios as shown here https://github.com/nuancedesignstudio/nds-advanced-search-demo._
 
 ## Description
 
@@ -44,6 +44,7 @@ You can control the `custom post types` to include in the search from `Settings-
 
 * Boilerplate files and comments have not been removed.
 * To rename the plugin and files refer the steps here: https://github.com/nuancedesignstudio/WordPress-Plugin-Boilerplate
+* For an example of how the plugin can be extended with Search Filters using Custom Taxonomies and Advanced Custom Fields, see https://github.com/nuancedesignstudio/nds-advanced-search-demo
 
 ### i18n Tools
 

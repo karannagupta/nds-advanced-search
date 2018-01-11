@@ -72,3 +72,7 @@ The plugin boiler plate is a modified version of the `Plugin Boiler Plate` here:
 ![Search suggestions as you type](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2017/12/nds-advanced-search-autosuggest.png "Search suggestions as you type")
 #### 4. Search results in a flexbox container
 ![Search results in a flexbox container](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2017/12/nds-advanced-search-results.png  "Search results in a flexbox container")
+
+## Flow of Control
+#### ![Plugin Flow of Control](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2018/01/advanced-search-plugin-flow-of-control.png  "Plugin Flow of Control")
+#### ![Plugin Flow of Control Transients](https://www.nuancedesignstudio.in/nds.in/wp-content/uploads/2018/01/advanced-search-plugin-delete-transients.png  "Plugin Flow of Control Transients")

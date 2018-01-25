@@ -113,8 +113,12 @@ class Admin {
 	 * @since    1.0.0
 	 */
 	public function load_settings_page() {
-		include_once( 'views/html-nds-advanced-search-admin-options.php' );
+		// check user capabilities.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+		}
 
+		include_once( 'views/html-nds-advanced-search-admin-options.php' );
 	}
 
 	/**
